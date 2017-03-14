@@ -1,5 +1,5 @@
 {
-  "name": "docker-compose-js",
+  "name": "docker-wrapper-js",
   "version": "0.0.1",
   "description": "Node.js driver for controlling docker-compose testing environments.",
   "main": "index.js",
@@ -17,6 +17,9 @@
   "author": "Kimbro Staken",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.4.0"
+    "bluebird": "^3.4.0",
+    "debug": "^2.6.3",
+    "dockerode": "git+ssh://git@github.com:hpthai7/dockerode.git#fix-list-networks",
+    "logger": "git+ssh://git@git.diya.one:8022/Libs/logger.git"
   }
 }

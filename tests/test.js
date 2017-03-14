@@ -1,4 +1,4 @@
-var compose = require('../index')('example.yaml');
+var compose = require('../lib/docker-compose')('example.yaml');
 
 compose.up()
     .then(function(result) {
