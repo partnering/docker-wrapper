@@ -6,7 +6,9 @@ var Promise = require('bluebird');
 var DockerCompose = function () {};
 
 /**
- * Construct arguments for spawned process
+ * Construct arguments for spawned process.
+ * Support multiple values for one flag, in which, values come under the form of array
+ * i.e. multiple yml files can be inputted as: { f: [ docker-compose-a.yml, docker-compose-b.yml ] }
  * @param {Object} opts
  * @returns {Array}
  * @private
@@ -17,8 +19,16 @@ DockerCompose.prototype._buildParams = function (opts) {
 	}
 	let args = []
 	for (let opt in opts) {
-		args.push((opt.length === 1 ? '-' : '--').concat(opt));
-		if (!!opts[opt]) args.push(opts[opt]); // not all options have attached values
+		let value = opts[opt]
+		if (Array.isArray(value)) {
+			for (let val of value) {
+				args.push((opt.length === 1 ? '-' : '--').concat(opt));
+				if (!!val) args.push(val);
+			}
+		} else {
+			args.push((opt.length === 1 ? '-' : '--').concat(opt));
+			if (!!opts[opt]) args.push(opts[opt]); // not all options have attached values
+		}
 	}
 	return args;
 }
@@ -83,6 +93,8 @@ DockerCompose.prototype._execute = function (command, opts, services, sub_opts) 
 
 /**
  * Put primary options to docker-compose. Be always used before any operations
+ * Reference: http://blog.schoolofdevops.com/wp-content/uploads/2016/10/Docker-compose-Cheat-Sheet-V1-1.pdf
+ *
  * @param {Object} opts
  * @returns {DockerCompose}
  */
@@ -101,6 +113,11 @@ DockerCompose.prototype.putEnv = function (env) {
 	return this;
 };
 
+/**
+ * Reference: http://blog.schoolofdevops.com/wp-content/uploads/2016/10/Docker-compose-Cheat-Sheet-V1-1.pdf
+ * @param opts
+ * @returns {Promise.<string>} stdout / stderr
+ */
 DockerCompose.prototype.up = function (opts) {
 	return this._execute('up', opts);
 };
@@ -168,4 +185,11 @@ DockerCompose.prototype.run = function (opts, service, command) {
 // logs is going to require special handling since it attaches to containers
 // logs: (services, options) => { return run('logs', options, services); },
 
-module.exports = DockerCompose
+/**
+ * {@link DockerCompose}.{@link putInitParams()}.{@link putEnv()}.{@link pseudOperation()}
+ * where pseudOperation may be {@link up()}
+ * @constructor
+ */
+const instance = new DockerCompose()
+
+module.exports = instance
