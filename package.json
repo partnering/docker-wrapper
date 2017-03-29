@@ -21,6 +21,6 @@
     "bluebird": "^3.4.0",
     "debug": "^2.6.3",
     "dockerode": "git+ssh://git@github.com:hpthai7/dockerode.git#fix-list-networks",
-    "d1-logger": "git+ssh://git@git.diya.one:8022/Libs/logger.git"
+    "d1-logger": "git+ssh://git@git.diya.one:8022/Libs/logger.git#rc2.0.0"
   }
 }
