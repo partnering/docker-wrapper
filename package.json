@@ -21,6 +21,7 @@
     "bluebird": "3.4.0",
     "d1-logger": "git+ssh://git@git.diya.one:8022/Libs/logger.git#rc2.0.0",
     "debug": "2.6.3",
+    "tar-fs": "1.15.0",
     "dockerode": "2.4.3"
   }
 }
