@@ -19,11 +19,11 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "3.4.0",
+    "d1-logger": "git+ssh://git@git.diya.one:8022/Libs/logger.git#1.0.0",
     "debug": "2.6.3",
     "dockerode": "2.4.3",
     "fs-extra": "3.0.1",
     "tar": "3.1.5",
-    "tar-fs": "1.15.0",
-    "d1-logger": "git+ssh://git@git.diya.one:8022/Libs/logger.git#1.0.0"
+    "tar-fs": "1.15.0"
   }
 }
